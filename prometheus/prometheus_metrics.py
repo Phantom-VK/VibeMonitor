@@ -3,7 +3,7 @@ from prometheus_client import Counter, Gauge, Histogram
 REQUEST_COUNTER = Counter(
     name="app_requests_total",
     documentation="Total number of requests to the app",
-    labelnames=["endpoint"]
+    labelnames=["endpoint", "method"]
 )
 
 RANDOM_NUMBER_GAUGE = Gauge(

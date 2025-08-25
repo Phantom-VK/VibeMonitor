@@ -3,6 +3,14 @@ import random
 import time
 
 def start_traffic(url:str, requests_count:int = 100, min_delay = 0.1, max_delay = 1.0):
+    """
+    Function to simulate traffic
+    :param url: url on which we want to make traffic
+    :param requests_count: count of requests to make to the url
+    :param min_delay: min delay between each request
+    :param max_delay: max delay between each request
+    :return: None
+    """
 
     print(f"Starting network traffic at {url}, total count = {requests_count}")
 

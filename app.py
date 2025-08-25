@@ -13,6 +13,12 @@ app.mount("/metrics", app = metrics_app)
 
 @app.middleware("http")
 async def metrics_middleware(request:Request, call_next):
+    """
+    Middleware function to intercept and process incoming requests
+    :param request:
+    :param call_next:
+    :return:
+    """
     start_time = time.time()
 
     response = await call_next(request)
@@ -21,7 +27,7 @@ async def metrics_middleware(request:Request, call_next):
     status_code = str(response.status_code)
     method = request.method
 
-    REQUEST_COUNTER.labels(endpoint = endpoint).inc()
+    REQUEST_COUNTER.labels(endpoint = endpoint, method = method).inc()
     REQUEST_STATUS_COUNTER.labels(endpoint = endpoint, status_code = status_code).inc()
     REQUEST_LATENCY_HISTOGRAM.labels(endpoint = endpoint, method = method).observe(process_time)
     return response
